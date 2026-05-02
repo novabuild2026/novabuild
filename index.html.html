@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<!-- Déclare le type de document (HTML5) -->
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <!-- Permet d’avoir un site responsive sur mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NovaBuild - Création de Sites Web</title>
+
+    <!-- ✅ CORRECTION : lien Google Fonts corrigé -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Reset CSS : enlève les marges/paddings par défaut */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Variables CSS (couleurs réutilisables) */
+        :root {
+            --neon-blue: #00f0ff;
+            --neon-purple: #b400ff;
+            --neon-pink: #ff00e5;
+            --dark-bg: #0a0a0f;
+            --card-bg: rgba(15, 15, 25, 0.8);
+        }
+
+        /* Style global du site */
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--dark-bg);
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ================= BACKGROUND ANIMÉ ================= */
+        .bg-animation {
+            position: fixed; /* reste en arrière-plan */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* derrière tout */
+            background: 
+                radial-gradient(ellipse at 20% 80%, rgba(180, 0, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(0, 240, 255, 0.15) 0%, transparent 50%);
+        }
+
+        /* Grille animée style "futuriste" */
+        .grid-overlay {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        /* Animation de la grille */
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+        }
+
+        /* ===== INFO MODIFICATIONS CLIENT ===== */
+        .modif-info {
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .modif-box {
+            max-width: 700px;
+            background: rgba(255, 0, 229, 0.08);
+            border: 1px solid rgba(255, 0, 229, 0.3);
+            border-radius: 15px;
+            padding: 20px 30px;
+
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            backdrop-filter: blur(10px);
+        }
+
+        .modif-box .icon {
+            font-size: 1.5rem;
+        }
+
+        /* ================= HEADER ================= */
+        header {
+            padding: 30px 50px;
+            display: flex;
+            justify-content: space-between; /* espace entre logo et localisation */
+            align-items: center;
+        }
+
+        /* Conteneur logo */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* ✅ CORRECTION : classe logo = image uniquement */
+        .logo {
+            width: 250px;
+            height: auto; /* ✅ garde les proportions */
+        }
+
+        /* Nom de la marque */
+        .brand-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+
+            /* Dégradé texte */
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Texte localisation */
+        .location {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* ================= HERO (section principale) ================= */
+        .hero {
+            min-height: 80vh; /* hauteur écran */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Titre principal */
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        /* Texte sous titre */
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        /* Bouton */
+        .cta-button {
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: white;
+
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+
+            /* effet au hover */
+            transition: 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+        }
+
+        /* ================= PRICING ================= */
+        .pricing {
+            padding: 80px 50px;
+            text-align: center;
+        }
+
+        .pricing-cards {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+        }
+
+        /* Carte */
+        .pricing-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            width: 300px;
+        }
+
+        /* ================= FOOTER ================= */
+        footer {
+            text-align: center;
+            padding: 30px;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* ===== POPUP FORMULAIRE ===== */
+.form-popup {
+    display: none; /* caché par défaut */
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.8);
+}
+
+/* contenu */
+.form-content {
+    background: #111;
+    margin: 5% auto;
+    padding: 30px;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+/* bouton fermer */
+.close-btn {
+    float: right;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/* champs */
+.form-content input,
+.form-content select,
+.form-content textarea {
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+}
+
+/* bouton envoyer */
+.form-content button {
+    background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+    border: none;
+    padding: 15px;
+    color: white;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Fond animé -->
+    <div class="bg-animation"></div>
+    <div class="grid-overlay"></div>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo-container">
+            <!-- Logo image -->
+            <img src="logo.png" alt="NovaBuild" class="logo">
+
+            <!-- Nom de marque -->
+            <div class="brand-name">NOVABUILD</div>
+        </div>
+
+        <!-- Localisation -->
+        <div class="location">Pont-de-Beauvoisin & Corbelin</div>
+    </header>
+
+    <!-- SECTION PRINCIPALE -->
+    <section class="hero">
+        <h1>Votre Site Web<br>En 1 Semaine</h1>
+
+        <p>
+            Nous créons des sites web modernes pour les commerçants qui n'ont pas de sittes web pour vous apportez plus de visibilité.
+        </p>
+
+        <!-- Bouton email -->
+        <a href="#" class="cta-button" onclick="openForm()">Contactez-nous</a>
+    </section>
+
+    <!-- TARIFS -->
+    <section class="pricing">
+        <h2>Nos Tarifs en liquide</h2>
+
+        <div class="pricing-cards">
+
+            <!-- Offre 1 -->
+            <div class="pricing-card">
+                <h3>Site Simple</h3>
+                <p>1 page</p>
+                <strong>30€</strong>
+            </div>
+
+            <!-- Offre 2 -->
+            <div class="pricing-card">
+                <h3>Site Complexe</h3>
+                <p>3 à 4 pages</p>
+                <strong>50 - 60€</strong>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="hero">
+        <h2>Contact</h2>
+
+        <a href="mailto:novabuild1986@gmail.com" class="cta-button">
+            novabuild1986@gmail.com
+        </a>
+    </section>
+
+    <section class="modif-info">
+      <div class="modif-box">
+          <span class="icon">⚠️</span>
+          <p>
+            Chaque projet inclut <strong>3 modifications maximum</strong>. 
+            Toute demande supplémentaire pourra entraîner des frais additionnels.
+          </p>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 NovaBuild</p>
+    </footer>
+
+<!-- POPUP FORMULAIRE -->
+<div id="contactForm" class="form-popup">
+    <div class="form-content">
+        <span class="close-btn" onclick="closeForm()">✖</span>
+
+        <h2>Demande de projet</h2>
+
+        <!-- ⚠️ Remplace par ton lien Formspree -->
+        <form action="https://formspree.io/f/maqvnzll" method="POST">
+
+            <input type="text" name="nom" placeholder="Votre nom" required>
+
+            <input type="text" name="entreprise" placeholder="Nom de votre entreprise" required>
+
+            <input type="text" name="objet" placeholder="Objet (optionnel)">
+
+            <select name="type_site" required>
+                <option value="">Type de site ?</option>
+                <option>Site vitrine (1 page)</option>
+                <option>Site multi-pages</option>
+                <option>Boutique en ligne</option>
+            </select>
+
+            <textarea name="details" placeholder="Décris ton projet (couleurs, style, fonctionnalités...)" required></textarea>
+
+            <button type="submit">Envoyer la demande</button>
+        </form>
+    </div>
+</div>
+
+<script>
+function openForm() {
+    document.getElementById("contactForm").style.display = "block";
+}
+
+function closeForm() {
+    document.getElementById("contactForm").style.display = "none";
+}
+</script>
+
+</body>
+</html>
